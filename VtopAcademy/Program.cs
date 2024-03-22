@@ -15,14 +15,15 @@ builder.Services.AddControllers();
 // Add services here
 
 //Entity Freamework
-//Comment this for production
+// Uncomment this for development
+//builder.Services.AddDbContext<ApplicationDbContext>(
+//    options => options.UseInMemoryDatabase("vtopacademy")
+//);
+
+// Comment this for devlempment
 builder.Services.AddDbContext<ApplicationDbContext>(
-    options => options.UseInMemoryDatabase("vtopacademy")
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("SQLDatabase"))
 );
-// UnComment this for production
-// builder.Services.AddDbContext<ApplicationDbContext>(
-//   options => options.UseSqlServer(
-//        builder.Configuration.GetConnectionString("Database")));
 
 // For Identity  
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -57,20 +58,22 @@ builder.Services.AddAuthentication(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.ConfigureSwaggerGen(setup =>
+{
+    setup.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "VtopAcademy API",
+        Version = "v1"
+    });
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
     app.UseSwaggerUI();
 }
 
