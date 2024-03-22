@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -10,10 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-// MongoDb connection
-builder.Services.Configure<QuizDatabaseSettings>(
-    builder.Configuration.GetSection("QuizDatabase")
-);
 
 // Add services here
 
@@ -26,6 +23,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 // builder.Services.AddDbContext<ApplicationDbContext>(
 //   options => options.UseSqlServer(
 //        builder.Configuration.GetConnectionString("Database")));
+
+// For Identity  
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 
 // Adding Authentication  
 builder.Services.AddAuthentication(options =>
