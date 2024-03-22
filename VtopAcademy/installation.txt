@@ -1,0 +1,17 @@
+
+
+Install below libraries using NuGet package manager.
+
+Microsoft.EntityFrameworkCore.SqlServer
+Microsoft.EntityFrameworkCore.InMemory
+Microsoft.EntityFrameworkCore.Tools
+MongoDb.Driver
+Microsoft.AspNetCore.Identity.EntityFrameworkCore
+Microsoft.AspNetCore.Identity
+Microsoft.AspNetCore.Authentication.JwtBearer
+
+Create empty ApplicationUser.cs and ApplicationDbContext.cs class files
+
+Add Connection Strings to appsettings.json file
+
+For Mongo, Add QuizDatabaseSettings Class file

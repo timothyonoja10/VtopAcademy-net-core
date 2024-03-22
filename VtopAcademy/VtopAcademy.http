@@ -1,0 +1,6 @@
+@VtopAcademy_HostAddress = http://localhost:5161
+
+GET {{VtopAcademy_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
