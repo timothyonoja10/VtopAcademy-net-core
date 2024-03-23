@@ -64,11 +64,11 @@ namespace VtopAcademy.Schools
                 SchoolToDTO(school));
         }
 
-        // PUT: api/Schools/SchoolID 
+        // PUT: api/Schools/SchoolId 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSchool(long id, SchoolDTO schoolDTO)
         {
-            if (!ModelState.IsValid || id != schoolDTO.SchoolID)
+            if (!ModelState.IsValid || id != schoolDTO.SchoolId)
             {
                 return BadRequest();
             }
@@ -94,7 +94,7 @@ namespace VtopAcademy.Schools
             return NoContent();
         }
 
-        // DELETE: api/Schools/SchoolID
+        // DELETE: api/Schools/SchoolId
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTodoItem(long id)
         {
@@ -118,7 +118,7 @@ namespace VtopAcademy.Schools
         private static SchoolDTO SchoolToDTO(School school) =>
            new SchoolDTO
            {
-               SchoolID = school.SchoolId,
+               SchoolId = school.SchoolId,
                Name = school.Name,
                Number = school.Number
            };
